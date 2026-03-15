@@ -1,6 +1,8 @@
-# Open Source Zero-Shot TTS Models Overview
+# Awesome TTS 🌟
 
-> [中文版](./开源ZeroShotTTS模型汇总.md)
+> [中文版](./README_CN.md)
+
+> A comprehensive collection of Text-to-Speech (TTS) systems, including open source, commercial, and research models.
 
 > Last Updated: 2026-03-15
 
@@ -8,501 +10,188 @@
 
 ## 📑 Table of Contents
 
-- [Model Comparison Overview](#model-comparison-overview)
-- [Pros & Cons](#pros--cons)
-  - [1. CosyVoice](#1-cosyvoice-alibaba)
-  - [2. VALL-E](#2-vall-e-microsoft)
-  - [3. Coqui XTTS](#3-coqui-xtts)
-  - [4. OpenVoice](#4-openvoice-myshell)
-  - [5. MaskGCT](#5-maskgct-bytedance)
-  - [6. Kokoro](#6-kokoro-reecho)
-  - [7. Fish-TTS / Fish Audio S2](#7-fish-tts--fish-audio-s2-fishaudio)
-  - [8. IndexTTS](#8-indextts-bilibili)
-  - [9. GPT-SoVITS](#9-gpt-sovits-rvc-boss)
+- [Open Source Models](#open-source-models)
+  - [Zero-Shot TTS](#zero-shot-tts)
+  - [Few-Shot / Fine-tuning TTS](#few-shot--fine-tuning-tts)
+  - [Traditional TTS](#traditional-tts)
+- [Commercial / Closed Source](#commercial--closed-source)
+- [Research Papers](#research-papers)
 - [Selection Guide](#selection-guide)
-- [Usage Guide](#usage-guide)
-  - [CosyVoice](#cosyvoice)
-  - [VALL-E](#vall-e)
-  - [Coqui XTTS](#coqui-xtts)
-  - [OpenVoice](#openvoice)
-  - [MaskGCT](#maskgct)
-  - [Kokoro](#kokoro)
-  - [Fish-TTS / Fish Audio S2](#fish-tts--fish-audio-s2)
-  - [IndexTTS](#indextts)
-  - [GPT-SoVITS](#gpt-sovits)
-- [Related Links](#related-links)
 
 ---
 
-## Model Comparison Overview
+## Open Source Models
 
-| Model | Team | Languages | Reference Audio | Features |
-|-------|------|-----------|-----------------|----------|
-| CosyVoice | Alibaba | Chinese/English | 3s | Best Chinese, streaming |
-| VALL-E | Microsoft | Multilingual | 3s | High academic impact |
-| XTTS | Coqui | Multilingual | 6-30s | Mature ecosystem |
-| OpenVoice | MyShell | Multilingual | Short audio | Real-time capable |
-| MaskGCT | ByteDance | Multilingual | Short audio | Near-commercial quality |
-| Kokoro | Reecho | English/Spanish | Short audio | Excellent English |
-| Fish Audio S2 | Fish Audio | Multilingual | 10s+ | SOTA quality, multi-speaker |
-| IndexTTS | Bilibili | Multilingual | 3s | Duration control, emotion disentangle |
-| GPT-SoVITS | RVC-Boss | Cross-lingual | 1min (few-shot) | Low data requirement |
+### Zero-Shot TTS
+
+| Model | Team | Languages | Reference | License | Features |
+|-------|------|-----------|-----------|---------|----------|
+| [CosyVoice](https://github.com/FunAudioLLM/CosyVoice) | Alibaba | CN/EN | 3s | Apache 2.0 | Best Chinese, streaming |
+| [VALL-E](https://github.com/microsoft/valle) | Microsoft | Multilingual | 3s | MIT | High academic impact |
+| [XTTS](https://github.com/coqui-ai/TTS) | Coqui | Multilingual | 6-30s | MPL 2.0 | Mature ecosystem |
+| [OpenVoice](https://github.com/myshell-ai/OpenVoice) | MyShell | Multilingual | Short | MIT | Real-time capable |
+| [MaskGCT](https://github.com/facebookresearch/maskgct) | ByteDance | Multilingual | Short | CC-BY-NC | Near-commercial quality |
+| [Kokoro](https://github.com/reechoai/kokoro) | Reecho | EN/ES | Short | Apache 2.0 | Excellent English |
+| [Fish Audio S2](https://github.com/fishaudio/fish-speech) | Fish Audio | Multilingual | 10s+ | Research | SOTA quality, multi-speaker |
+| [IndexTTS](https://github.com/index-tts/index-tts) | Bilibili | Multilingual | 3s | Research | Duration control, emotion |
+| [YourTTS](https://github.com/Edresson/YourTTS) | Academic | Multilingual | 10s+ | Apache 2.0 | Multi-speaker, zero-shot |
+
+#### Pros & Cons
+
+**CosyVoice (Alibaba)**
+- ✅ Best Chinese quality, streaming, fast
+- ❌ English weaker than Chinese
+
+**VALL-E (Microsoft)**
+- ✅ Academic influence, multilingual
+- ❌ Slower, quality behind newer models
+
+**XTTS (Coqui)**
+- ✅ Wide language support, mature ecosystem
+- ❌ Average quality, Chinese weak
+
+**OpenVoice (MyShell)**
+- ✅ Real-time, easy deployment
+- ❌ Limited quality
+
+**MaskGCT (ByteDance)**
+- ✅ Near-commercial quality
+- ❌ High resource needs
+
+**Kokoro**
+- ✅ Excellent English, fast
+- ❌ English/Spanish only
+
+**Fish Audio S2**
+- ✅ SOTA quality, multi-speaker
+- ❌ High resources, large model
+
+**IndexTTS (Bilibili)**
+- ✅ Duration control, emotion disentangle
+- ❌ Newer, smaller community
 
 ---
 
-## Pros & Cons
+### Few-Shot / Fine-tuning TTS
 
-### 1. CosyVoice (Alibaba)
+| Model | Team | Data Required | Languages | License | Features |
+|-------|------|---------------|-----------|---------|----------|
+| [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS) | RVC-Boss | 1-10min | Cross-lingual | MIT | Low data, WebUI |
+| [GPT-VITS](https://github.com/innnky/gpt-vits) | Community | Few min | CN/EN | MIT | Few-shot training |
+| [BERT-VITS2](https://github.com/fishaudio/Bert-VITS2) | Fish Audio | Few min | CN/EN | MIT | BERT embedding |
+| [SoVITS](https://github.com/RVC-Boss/SoVITS) | RVC-Boss | Few min | CN/EN | MIT | Lightweight |
 
-| Pros | Cons |
-|------|------|
-| Best-in-class Chinese | English slightly weaker than Chinese |
-| Streaming inference support | 1B model requires more resources |
-| Fast inference | |
-| Rich emotion control | |
+---
 
-### 2. VALL-E (Microsoft)
+### Traditional TTS
 
-| Pros | Cons |
-|------|------|
-| High academic influence | Slower inference |
-| Multilingual support | Requires longer reference audio |
-| 3s cloning | Audio quality behind newer models |
+| Model | Team | Languages | License | Features |
+|-------|------|-----------|---------|----------|
+| [MeloTTS](https://github.com/myshell-ai/MeloTTS) | MyShell | Multilingual | LGPL | Lightweight, fast |
+| [VITS](https://github.com/jaywalnut310/vits) | Academic | Multilingual | MIT | Classic E2E TTS |
+| [FastSpeech 2s](https://github.com/microsoft/SpeechT5) | Microsoft | Multilingual | MIT | Duration control |
+| [FastSpeech](https://github.com/bytedance/Elanlytics) | ByteDance | Multilingual | MIT | Fast, high quality |
+| [Tacotron 2](https://github.com/NVIDIA/Tacotron2) | NVIDIA | EN | Apache 2.0 | Classic |
+| [WaveNet](https://github.com/tensorflow/magenta) | DeepMind | Multilingual | Apache 2.0 | High quality, slow |
+| [Transformer-TTS](https://github.com/as-ideas/TransformerTTS) | Academic | EN | MIT | Attention-based |
 
-### 3. Coqui XTTS
+---
 
-| Pros | Cons |
-|------|------|
-| Widest language support | Average audio quality |
-| Mature open source ecosystem | Mediocre Chinese quality |
-| Production-ready deployment | Paid for commercial use |
+## Commercial / Closed Source
 
-### 4. OpenVoice (MyShell)
+### Leading TTS Services
 
-| Pros | Cons |
-|------|------|
-| Real-time capable | Limited audio quality |
-| Easy deployment | Average cloning similarity |
-| Completely free & open source | |
+| Service | Provider | Features | Website |
+|---------|----------|----------|---------|
+| **ElevenLabs** | Eleven Labs | Best quality, emotion control | https://elevenlabs.io |
+| **OpenAI TTS** | OpenAI | GPT integration, natural | https://platform.openai.com/docs/models/text-to-speech |
+| **Azure TTS** | Microsoft | Enterprise, many voices | https://azure.microsoft.com/services/cognitive-services/text-to-speech |
+| **Google Cloud TTS** | Google | WaveNet voices, multilingual | https://cloud.google.com/text-to-speech |
+| **Amazon Polly** | AWS | Neural voices, SSML | https://aws.amazon.com/polly |
+| **Coqui Studio** | Coqui | Studio quality | https://coqui.ai |
+| **WellSaid Labs** | WellSaid | Enterprise voices | https://wellsaidlabs.com |
+| **Murf AI** | Murf | Studio, many voices | https://murf.ai |
+| **Respeecher** | Respeecher | Voice cloning | https://respeecher.com |
+| **Respeecher** | Respeecher | Voice cloning | https://respeecher.com |
+| **Synthesia** | Synthesia | Video + TTS | https://synthesia.io |
+| **Play.ht** | Play.ht | API, voices | https://play.ht |
+| **Speechify** | Speechify | Audiobooks | https://speechify.com |
+| **Lovo.ai** | Lovo | Creative voices | https://lovo.ai |
+| **Voice.ai** | Voice.ai | Real-time | https://voice.ai |
 
-### 5. MaskGCT (ByteDance)
+### Chinese TTS Services
 
-| Pros | Cons |
-|------|------|
-| Near-commercial audio quality | High resource requirements |
-| Good multilingual performance | Complex deployment |
-| Excellent zero-shot performance | |
+| Service | Provider | Features | Website |
+|---------|----------|----------|---------|
+| **讯飞语音云** | iFlytek | Industrial, many voices | https://www.xfyun.cn |
+| **百度语音** | Baidu | ASR+TTS | https://ai.baidu.com/tech/speech |
+| **阿里云语音** | Alibaba | Neural voices | https://damo.console.aliyun.com |
+| **腾讯云语音** | Tencent | TTS service | https://cloud.tencent.com/product/tts |
+| **思必驰** | AISpeech | Domain-specific | https://www.aispeech.com |
+| **云知声** | Unisound | AI voices | https://www.unisound.com |
 
-### 6. Kokoro
+### Research Models (Not Fully Open Source)
 
-| Pros | Cons |
-|------|------|
-| Excellent English output | English/Spanish only |
-| Fast inference | No Chinese support |
-| Small model size | |
+| Model | Team | Features | Status |
+|-------|------|----------|--------|
+| **Seed-TTS** | ByteDance | SOTA quality | Paper only |
+| **MiniMax Speech** | MiniMax | Excellent quality | API only |
+| **Qwen-TTS** | Alibaba | Integrated with Qwen | Limited |
+| **Gemini TTS** | Google | Multimodal | Internal |
 
-### 7. Fish-TTS / Fish Audio S2 (Fish Audio)
+---
 
-| Pros | Cons |
-|------|------|
-| SOTA quality (exceeds Seed-TTS) | High resource requirements |
-| Multi-speaker support | Large model (4B params) |
-| Fine-grained emotion control | |
-| RL alignment for natural speech | |
+## Research Papers
 
-### 8. IndexTTS (Bilibili)
-
-| Pros | Cons |
-|------|------|
-| Precise duration control | Relatively new |
-| Emotion/timbre disentanglement | Limited community |
-| Good multilingual quality | |
-| Natural prosody reproduction | |
-
-### 9. GPT-SoVITS (RVC-Boss)
-
-| Pros | Cons |
-|------|------|
-| 1-minute data for fine-tuning | Requires training |
-| Cross-lingual inference | Not true zero-shot |
-| WebUI included | Quality varies |
-| Active community | |
+| Paper | Year | Key Contribution |
+|-------|------|-------------------|
+| [VALL-E](https://arxiv.org/abs/2301.02111) | 2023 | Zero-shot TTS via audio codec |
+| [NaturalSpeech](https://arxiv.org/abs/2205.04521) | 2022 | End-to-end TTS |
+| [FastSpeech](https://arxiv.org/abs/1905.09263) | 2019 | Non-autoregressive TTS |
+| [FastSpeech 2s](https://arxiv.org/abs/2010.05689) | 2020 | Direct waveform generation |
+| [WaveNet](https://arxiv.org/abs/1609.03499) | 2016 | Neural parametric TTS |
+| [Tacotron 2](https://arxiv.org/abs/1712.05884) | 2017 | Sequence-to-sequence TTS |
+| [Transformer-TTS](https://arxiv.org/abs/1809.08895) | 2018 | Transformer-based TTS |
+| [YourTTS](https://arxiv.org/abs/2110.06280) | 2021 | Zero-shot multi-speaker |
+| [GPT-SoVITS](https://github.com/RVC-Boss/GPT-SoVITS) | 2024 | Few-shot TTS |
+| [Fish Audio S2](https://arxiv.org/abs/2411.01156) | 2024 | RL-aligned TTS |
+| [IndexTTS](https://arxiv.org/abs/2506.21619) | 2025 | Duration control |
 
 ---
 
 ## Selection Guide
 
+### Open Source
+
 | Use Case | Recommended |
 |----------|-------------|
 | Chinese cloning | CosyVoice / IndexTTS / Fish Audio S2 |
 | English cloning | Kokoro / Fish Audio S2 / XTTS |
-| Real-time requirements | OpenVoice / CosyVoice |
+| Real-time | OpenVoice / CosyVoice |
 | Best quality | Fish Audio S2 / IndexTTS / MaskGCT |
 | Quick deployment | OpenVoice / XTTS |
-| Low data (few-shot) | GPT-SoVITS / Fish-TTS |
+| Low data | GPT-SoVITS / SoVITS |
 | Duration control | IndexTTS / VALL-E |
-| Multi-speaker dialogue | Fish Audio S2 |
+| Multi-speaker | Fish Audio S2 / YourTTS |
+
+### Commercial
+
+| Use Case | Recommended |
+|----------|-------------|
+| Best quality | ElevenLabs / OpenAI |
+| Enterprise | Azure / Google Cloud / AWS |
+| Chinese | 讯飞 / 百度 / 阿里云 |
+| Video dubbing | Synthesia / HeyGen |
+| Audiobooks | Speechify / Murf |
 
 ---
 
-## Usage Guide
+## Contributing
 
-### CosyVoice
-
-#### Environment Setup
-```bash
-# Clone repository
-git clone https://github.com/FunAudioLLM/CosyVoice.git
-cd CosyVoice
-
-# Create conda environment
-conda create -n cosyvoice python=3.10
-conda activate cosyvoice
-
-# Install dependencies
-pip install -r requirements.txt
-```
-
-#### Generate First Audio
-```python
-from cosyvoice import CosyVoice
-
-# Initialize (downloads model on first run)
-cosyvoice = CosyVoice('cosyvoice-300M')
-
-# Zero-shot TTS
-output = cosyvoice.generate(
-    text='Hello world, this is a test.',
-    ref_audio='path/to/reference.wav',
-    stream=False
-)
-
-# Save output
-output['audio'].save('output.wav')
-```
+Welcome to add more TTS resources! Please submit PRs or issues.
 
 ---
 
-### VALL-E
+## License
 
-#### Environment Setup
-```bash
-git clone https://github.com/microsoft/valle.git
-cd valle
-
-conda create -n valle python=3.9
-conda activate valle
-pip install -r requirements.txt
-```
-
-#### Generate First Audio
-```python
-import torch
-from valle import Valley
-
-model = Valley.from_pretrained('microsoft/valle-base')
-model.eval()
-
-with torch.no_grad():
-    output = model.generate(
-        text="Hello world",
-        prompt_audio="prompt.wav",
-        prompt_text="Hello"
-    )
-
-torchaudio.save('output.wav', output, 24000)
-```
-
----
-
-### Coqui XTTS
-
-#### Environment Setup
-```bash
-pip install tts
-
-# Or from source
-git clone https://github.com/coqui-ai/TTS.git
-cd TTS
-pip install -e .
-```
-
-#### Generate First Audio
-```python
-from TTS.api import TTS
-
-tts = TTS("xtts_v2", gpu=True)
-
-tts.tts(
-    text="Hello world, this is a test.",
-    file_path="output.wav",
-    speaker_wav="reference.wav",
-    language="en"
-)
-```
-
----
-
-### OpenVoice
-
-#### Environment Setup
-```bash
-git clone https://github.com/myshell-ai/OpenVoice.git
-cd OpenVoice
-
-conda create -n openvoice python=3.10
-conda activate openvoice
-pip install -r requirements.txt
-```
-
-#### Generate First Audio
-```python
-from openvoice import se_extractor
-from openvoice.api import ToneColorConverter
-
-converter = ToneColorConverter('checkpoints/converter.yaml')
-converter.load_ckpt('checkpoints/converter.pth')
-
-se = se_extractor.get_se('reference.wav', converter)
-
-output = converter.convert(
-    audio_prompt='path/to/audio_prompt.wav',
-    text='Hello world',
-    language='English',
-    se=se
-)
-
-output['audio'].save('output.wav')
-```
-
----
-
-### MaskGCT
-
-#### Environment Setup
-```bash
-git clone https://github.com/facebookresearch/maskgct.git
-cd maskgct
-
-conda create -n maskgct python=3.10
-conda activate maskgct
-pip install -r requirements.txt
-```
-
-#### Generate First Audio
-```python
-import maskgct
-
-model = maskgct.Model.from_pretrained('maskgct-xl')
-
-output = model.generate(
-    text='Hello world',
-    ref_audio='reference.wav',
-    language='en'
-)
-
-output.save('output.wav')
-```
-
----
-
-### Kokoro
-
-#### Environment Setup
-```bash
-pip install kokoro-onnx
-
-# Download model files from GitHub releases
-```
-
-#### Generate First Audio
-```python
-from kokoro_onnx import Kokoro
-
-kokoro = Kokoro(
-    model_path='kokoro-v1.0.onnx',
-    voices_path='voices.json'
-)
-
-samples, sample_rate = kokoro.generate(
-    "Hello world, this is a test.",
-    voice='af_sarah'
-)
-
-kokoro.save_wav(samples, 'output.wav')
-```
-
----
-
-### Fish-TTS / Fish Audio S2
-
-#### Environment Setup
-```bash
-git clone https://github.com/fishaudio/fish-speech.git
-cd fish-speech
-
-# Create environment
-conda create -n fish-speech python=3.10
-conda activate fish-speech
-
-# Install using uv (recommended)
-pip install -U uv
-uv sync --all-extras
-
-# Or pip
-pip install -r requirements.txt
-```
-
-#### Download Models
-```bash
-# Using huggingface-cli
-hf download fishaudio/s2-pro --local-dir=checkpoints
-
-# Or modelscope
-modelscope download --model fishaudio/s2-pro --local_dir checkpoints
-```
-
-#### Generate First Audio
-```python
-from fish_audio import FishAudio
-
-# Initialize S2-Pro model
-model = FishAudio("s2-pro")
-
-# Generate with reference
-audio = model.generate(
-    text="Hello world, this is a test.",
-    reference_audio="reference.wav",  # 10+ seconds recommended
-    language="en"
-)
-
-# Save
-audio.save("output.wav")
-```
-
-#### With Emotion Control
-```python
-# Using natural language tags for emotion
-audio = model.generate(
-    text="Hello! [laugh] This is amazing! [whispers] Can't believe it.",
-    reference_audio="reference.wav",
-    language="en"
-)
-```
-
----
-
-### IndexTTS
-
-#### Environment Setup
-```bash
-git clone https://github.com/index-tts/index-tts.git
-cd index-tts
-
-# Install uv (required)
-pip install -U uv
-
-# Install dependencies
-uv sync --all-extras
-
-# Download models
-hf download IndexTeam/IndexTTS-2 --local-dir=checkpoints
-# Or in China
-modelscope download --model IndexTeam/IndexTTS-2 --local_dir checkpoints
-```
-
-#### Generate First Audio
-```python
-from index_tts import IndexTTS
-
-# Initialize
-tts = IndexTTS("checkpoints")
-
-# Generate
-audio = tts.tts(
-    text="Hello world, this is a test.",
-    ref_audio="reference.wav",
-    language="en"
-)
-
-# Save
-audio.save("output.wav")
-```
-
-#### With Emotion Control
-```python
-# Separate timbre and emotion prompts
-audio = tts.tts(
-    text="Hello world",
-    ref_audio="speaker.wav",      # timbre reference
-    style_audio="happy.wav",      # emotion reference
-    language="en"
-)
-```
-
-#### Duration Control (IndexTTS 2.0)
-```python
-# Precise duration control mode
-audio = tts.tts(
-    text="Hello world",
-    ref_audio="reference.wav",
-    duration=5.0,  # exact seconds
-    language="en"
-)
-```
-
----
-
-### GPT-SoVITS
-
-#### Environment Setup
-```bash
-git clone https://github.com/RVC-Boss/GPT-SoVITS.git
-cd GPT-SoVITS
-
-# Windows: download pre-packaged version
-# Or install via script
-conda create -n GPTSoVits python=3.10
-conda activate GPTSoVits
-
-# Windows
-pwsh -F install.ps1 --Device CU126 --Source HF
-
-# Linux
-bash install.sh --device CU126 --source HF
-```
-
-#### Quick Start (WebUI)
-```bash
-# Launch WebUI
-python webui.py --listen 0.0.0.0 --port 7860
-```
-
-#### Zero-shot Inference
-```python
-# 5-second audio for zero-shot
-# Requires training for better quality (1-10 min data)
-```
-
-#### Fine-tuning (Few-shot)
-```bash
-# Prepare 1-10 minute audio
-# Use WebUI for training
-# Supports cross-lingual inference
-```
-
----
-
-## Related Links
-
-| Model | GitHub | HuggingFace |
-|-------|--------|-------------|
-| CosyVoice | https://github.com/FunAudioLLM/CosyVoice | https://huggingface.co/fun-audio/CosyVoice-300M |
-| VALL-E | https://github.com/microsoft/valle | https://huggingface.co/microsoft/valle-base |
-| Coqui TTS | https://github.com/coqui-ai/TTS | https://huggingface.co/coqui |
-| OpenVoice | https://github.com/myshell-ai/OpenVoice | - |
-| MaskGCT | https://github.com/facebookresearch/maskgct | - |
-| Kokoro | https://github.com/reechoai/kokoro | - |
-| Fish Audio S2 | https://github.com/fishaudio/fish-speech | https://huggingface.co/fishaudio/s2-pro |
-| IndexTTS | https://github.com/index-tts/index-tts | https://huggingface.co/IndexTeam/IndexTTS-2 |
-| GPT-SoVITS | https://github.com/RVC-Boss/GPT-SoVITS | https://huggingface.co/lj1995/GPT-SoVITS |
+This list is for educational purposes.
