@@ -24,17 +24,17 @@
 
 ### Zero-Shot TTS
 
-| 模型 | 团队 | 语言 | 参考音频 | 许可证 | 特点 |
-|------|------|------|----------|--------|------|
-| [CosyVoice](https://github.com/FunAudioLLM/CosyVoice) | 阿里 | 中/英 | 3秒 | Apache 2.0 | 中文最强，流式推理 |
-| [VALL-E](https://github.com/microsoft/valle) | 微软 | 多语言 | 3秒 | MIT | 学术影响力高 |
-| [XTTS](https://github.com/coqui-ai/TTS) | Coqui | 多语言 | 6-30秒 | MPL 2.0 | 生态成熟 |
-| [OpenVoice](https://github.com/myshell-ai/OpenVoice) | MyShell | 多语言 | 短音频 | MIT | 实时性强 |
-| [MaskGCT](https://github.com/facebookresearch/maskgct) | 字节 | 多语言 | 短音频 | CC-BY-NC | 接近商业级音质 |
-| [Kokoro](https://github.com/reechoai/kokoro) | Reecho | 英文/西语 | 短音频 | Apache 2.0 | 英文效果出色 |
-| [Fish Audio S2](https://github.com/fishaudio/fish-speech) | Fish Audio | 多语言 | 10秒+ | 研究 | SOTA质量，多说话人 |
-| [IndexTTS](https://github.com/index-tts/index-tts) | 哔哩哔哩 | 多语言 | 3秒 | 研究 | 时长控制，情感解耦 |
-| [YourTTS](https://github.com/Edresson/YourTTS) | 学术 | 多语言 | 10秒+ | Apache 2.0 | 多说话人，zero-shot |
+| 模型 | 团队 | 语言 | 参考音频 | 许可证 | 论文 | 特点 |
+|------|------|------|----------|--------|------|------|
+| [CosyVoice](https://github.com/FunAudioLLM/CosyVoice) | 阿里 | 中/英 | 3秒 | Apache 2.0 | - | 中文最强，流式推理 |
+| [VALL-E](https://github.com/microsoft/valle) | 微软 | 多语言 | 3秒 | MIT | [论文](https://arxiv.org/abs/2301.02111) | 学术影响力高 |
+| [XTTS](https://github.com/coqui-ai/TTS) | Coqui | 多语言 | 6-30秒 | MPL 2.0 | - | 生态成熟 |
+| [OpenVoice](https://github.com/myshell-ai/OpenVoice) | MyShell | 多语言 | 短音频 | MIT | - | 实时性强 |
+| [MaskGCT](https://github.com/facebookresearch/maskgct) | 字节 | 多语言 | 短音频 | CC-BY-NC | [论文](https://arxiv.org/abs/2407.08551) | 接近商业级音质 |
+| [Kokoro](https://github.com/reechoai/kokoro) | Reecho | 英文/西语 | 短音频 | Apache 2.0 | - | 英文效果出色 |
+| [Fish Audio S2](https://github.com/fishaudio/fish-speech) | Fish Audio | 多语言 | 10秒+ | 研究 | [论文](https://arxiv.org/abs/2411.01156) | SOTA质量，多说话人 |
+| [IndexTTS](https://github.com/index-tts/index-tts) | 哔哩哔哩 | 多语言 | 3秒 | 研究 | [论文](https://arxiv.org/abs/2506.21619) | 时长控制，情感解耦 |
+| [YourTTS](https://github.com/Edresson/YourTTS) | 学术 | 多语言 | 10秒+ | Apache 2.0 | [论文](https://arxiv.org/abs/2110.06280) | 多说话人，zero-shot |
 
 #### 优缺点
 
@@ -188,6 +188,13 @@
 ## 贡献
 
 欢迎添加更多TTS资源！请提交PR或issues。
+
+## 类似Awesome列表
+
+- [Awesome-Text-to-Speech](https://github.com/ishandutta2007/Awesome-Text-to-Speech) (96 ⭐) - 最近更新的综合TTS列表
+- [Awesome-Text-to-Speech-TTS](https://github.com/TouchSky-Lab/Awesome-Text-to-Speech-TTS) (63 ⭐)
+- [awesome-speech-recognition-speech-synthesis-papers](https://github.com/zzw922cn/awesome-speech-recognition-speech-synthesis-papers) (3.1k ⭐) - ASR & TTS论文
+- [Neural-Codec-and-Speech-Language-Models](https://github.com/LqNoob/Neural-Codec-and-Speech-Language-Models) (241 ⭐) - 神经编解码器和语音语言模型
 
 ---
 

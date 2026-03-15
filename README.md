@@ -24,17 +24,17 @@
 
 ### Zero-Shot TTS
 
-| Model | Team | Languages | Reference | License | Features |
-|-------|------|-----------|-----------|---------|----------|
-| [CosyVoice](https://github.com/FunAudioLLM/CosyVoice) | Alibaba | CN/EN | 3s | Apache 2.0 | Best Chinese, streaming |
-| [VALL-E](https://github.com/microsoft/valle) | Microsoft | Multilingual | 3s | MIT | High academic impact |
-| [XTTS](https://github.com/coqui-ai/TTS) | Coqui | Multilingual | 6-30s | MPL 2.0 | Mature ecosystem |
-| [OpenVoice](https://github.com/myshell-ai/OpenVoice) | MyShell | Multilingual | Short | MIT | Real-time capable |
-| [MaskGCT](https://github.com/facebookresearch/maskgct) | ByteDance | Multilingual | Short | CC-BY-NC | Near-commercial quality |
-| [Kokoro](https://github.com/reechoai/kokoro) | Reecho | EN/ES | Short | Apache 2.0 | Excellent English |
-| [Fish Audio S2](https://github.com/fishaudio/fish-speech) | Fish Audio | Multilingual | 10s+ | Research | SOTA quality, multi-speaker |
-| [IndexTTS](https://github.com/index-tts/index-tts) | Bilibili | Multilingual | 3s | Research | Duration control, emotion |
-| [YourTTS](https://github.com/Edresson/YourTTS) | Academic | Multilingual | 10s+ | Apache 2.0 | Multi-speaker, zero-shot |
+| Model | Team | Languages | Reference | License | Paper | Features |
+|-------|------|-----------|-----------|---------|------|----------|
+| [CosyVoice](https://github.com/FunAudioLLM/CosyVoice) | Alibaba | CN/EN | 3s | Apache 2.0 | - | Best Chinese, streaming |
+| [VALL-E](https://github.com/microsoft/valle) | Microsoft | Multilingual | 3s | MIT | [Paper](https://arxiv.org/abs/2301.02111) | High academic impact |
+| [XTTS](https://github.com/coqui-ai/TTS) | Coqui | Multilingual | 6-30s | MPL 2.0 | - | Mature ecosystem |
+| [OpenVoice](https://github.com/myshell-ai/OpenVoice) | MyShell | Multilingual | Short | MIT | - | Real-time capable |
+| [MaskGCT](https://github.com/facebookresearch/maskgct) | ByteDance | Multilingual | Short | CC-BY-NC | [Paper](https://arxiv.org/abs/2407.08551) | Near-commercial quality |
+| [Kokoro](https://github.com/reechoai/kokoro) | Reecho | EN/ES | Short | Apache 2.0 | - | Excellent English |
+| [Fish Audio S2](https://github.com/fishaudio/fish-speech) | Fish Audio | Multilingual | 10s+ | Research | [Paper](https://arxiv.org/abs/2411.01156) | SOTA quality, multi-speaker |
+| [IndexTTS](https://github.com/index-tts/index-tts) | Bilibili | Multilingual | 3s | Research | [Paper](https://arxiv.org/abs/2506.21619) | Duration control, emotion |
+| [YourTTS](https://github.com/Edresson/YourTTS) | Academic | Multilingual | 10s+ | Apache 2.0 | [Paper](https://arxiv.org/abs/2110.06280) | Multi-speaker, zero-shot |
 
 #### Pros & Cons
 
@@ -189,6 +189,13 @@
 ## Contributing
 
 Welcome to add more TTS resources! Please submit PRs or issues.
+
+## Similar Awesome Lists
+
+- [Awesome-Text-to-Speech](https://github.com/ishandutta2007/Awesome-Text-to-Speech) (96 ⭐) - Recently updated comprehensive TTS list
+- [Awesome-Text-to-Speech-TTS](https://github.com/TouchSky-Lab/Awesome-Text-to-Speech-TTS) (63 ⭐)
+- [awesome-speech-recognition-speech-synthesis-papers](https://github.com/zzw922cn/awesome-speech-recognition-speech-synthesis-papers) (3.1k ⭐) - ASR & TTS papers
+- [Neural-Codec-and-Speech-Language-Models](https://github.com/LqNoob/Neural-Codec-and-Speech-Language-Models) (241 ⭐) - Neural codec & speech LMs
 
 ---
 
