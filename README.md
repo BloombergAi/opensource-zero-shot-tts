@@ -9,14 +9,16 @@
 ## 📑 Table of Contents
 
 - [Model Comparison Overview](#model-comparison-overview)
-- [Pros \& Cons](#pros--cons)
+- [Pros & Cons](#pros--cons)
   - [1. CosyVoice](#1-cosyvoice-alibaba)
   - [2. VALL-E](#2-vall-e-microsoft)
   - [3. Coqui XTTS](#3-coqui-xtts)
   - [4. OpenVoice](#4-openvoice-myshell)
   - [5. MaskGCT](#5-maskgct-bytedance)
   - [6. Kokoro](#6-kokoro-reecho)
-  - [7. Fish-TTS](#7-fish-tts-ant-group)
+  - [7. Fish-TTS / Fish Audio S2](#7-fish-tts--fish-audio-s2-fishaudio)
+  - [8. IndexTTS](#8-indextts-bilibili)
+  - [9. GPT-SoVITS](#9-gpt-sovits-rvc-boss)
 - [Selection Guide](#selection-guide)
 - [Usage Guide](#usage-guide)
   - [CosyVoice](#cosyvoice)
@@ -25,7 +27,9 @@
   - [OpenVoice](#openvoice)
   - [MaskGCT](#maskgct)
   - [Kokoro](#kokoro)
-  - [Fish-TTS](#fish-tts)
+  - [Fish-TTS / Fish Audio S2](#fish-tts--fish-audio-s2)
+  - [IndexTTS](#indextts)
+  - [GPT-SoVITS](#gpt-sovits)
 - [Related Links](#related-links)
 
 ---
@@ -40,7 +44,9 @@
 | OpenVoice | MyShell | Multilingual | Short audio | Real-time capable |
 | MaskGCT | ByteDance | Multilingual | Short audio | Near-commercial quality |
 | Kokoro | Reecho | English/Spanish | Short audio | Excellent English |
-| Fish-TTS | Ant Group | Chinese/English | Few-shot | Efficient inference |
+| Fish Audio S2 | Fish Audio | Multilingual | 10s+ | SOTA quality, multi-speaker |
+| IndexTTS | Bilibili | Multilingual | 3s | Duration control, emotion disentangle |
+| GPT-SoVITS | RVC-Boss | Cross-lingual | 1min (few-shot) | Low data requirement |
 
 ---
 
@@ -95,13 +101,32 @@
 | Fast inference | No Chinese support |
 | Small model size | |
 
-### 7. Fish-TTS (Ant Group)
+### 7. Fish-TTS / Fish Audio S2 (Fish Audio)
 
 | Pros | Cons |
 |------|------|
-| Good few-shot performance | Smaller community |
-| Good Chinese support | Limited documentation |
-| Efficient inference | |
+| SOTA quality (exceeds Seed-TTS) | High resource requirements |
+| Multi-speaker support | Large model (4B params) |
+| Fine-grained emotion control | |
+| RL alignment for natural speech | |
+
+### 8. IndexTTS (Bilibili)
+
+| Pros | Cons |
+|------|------|
+| Precise duration control | Relatively new |
+| Emotion/timbre disentanglement | Limited community |
+| Good multilingual quality | |
+| Natural prosody reproduction | |
+
+### 9. GPT-SoVITS (RVC-Boss)
+
+| Pros | Cons |
+|------|------|
+| 1-minute data for fine-tuning | Requires training |
+| Cross-lingual inference | Not true zero-shot |
+| WebUI included | Quality varies |
+| Active community | |
 
 ---
 
@@ -109,11 +134,14 @@
 
 | Use Case | Recommended |
 |----------|-------------|
-| Chinese cloning | CosyVoice / MaskGCT |
-| English cloning | Kokoro / XTTS |
+| Chinese cloning | CosyVoice / IndexTTS / Fish Audio S2 |
+| English cloning | Kokoro / Fish Audio S2 / XTTS |
 | Real-time requirements | OpenVoice / CosyVoice |
-| Best quality | MaskGCT / CosyVoice-2 |
+| Best quality | Fish Audio S2 / IndexTTS / MaskGCT |
 | Quick deployment | OpenVoice / XTTS |
+| Low data (few-shot) | GPT-SoVITS / Fish-TTS |
+| Duration control | IndexTTS / VALL-E |
+| Multi-speaker dialogue | Fish Audio S2 |
 
 ---
 
@@ -133,9 +161,6 @@ conda activate cosyvoice
 
 # Install dependencies
 pip install -r requirements.txt
-
-# Download models (automatically on first run)
-# Or manually download from HuggingFace
 ```
 
 #### Generate First Audio
@@ -156,30 +181,18 @@ output = cosyvoice.generate(
 output['audio'].save('output.wav')
 ```
 
-#### CLI Usage
-```bash
-# Single file inference
-python inference.py --text "Hello" --ref_audio ref.wav --output output.wav
-```
-
 ---
 
 ### VALL-E
 
 #### Environment Setup
 ```bash
-# Clone repository
 git clone https://github.com/microsoft/valle.git
 cd valle
 
-# Create environment
 conda create -n valle python=3.9
 conda activate valle
-
-# Install dependencies
 pip install -r requirements.txt
-
-# Download models (see releases)
 ```
 
 #### Generate First Audio
@@ -187,24 +200,16 @@ pip install -r requirements.txt
 import torch
 from valle import Valley
 
-# Load model
 model = Valley.from_pretrained('microsoft/valle-base')
 model.eval()
 
-# Prepare prompts
-text = "Hello world"
-prompt_audio = "prompt.wav"
-prompt_text = "Hello"
-
-# Generate
 with torch.no_grad():
     output = model.generate(
-        text,
-        prompt_audio,
-        prompt_text
+        text="Hello world",
+        prompt_audio="prompt.wav",
+        prompt_text="Hello"
     )
 
-# Save
 torchaudio.save('output.wav', output, 24000)
 ```
 
@@ -214,10 +219,9 @@ torchaudio.save('output.wav', output, 24000)
 
 #### Environment Setup
 ```bash
-# Install TTS
 pip install tts
 
-# Or install from source
+# Or from source
 git clone https://github.com/coqui-ai/TTS.git
 cd TTS
 pip install -e .
@@ -227,21 +231,14 @@ pip install -e .
 ```python
 from TTS.api import TTS
 
-# Initialize XTTS
 tts = TTS("xtts_v2", gpu=True)
 
-# Generate
 tts.tts(
     text="Hello world, this is a test.",
     file_path="output.wav",
     speaker_wav="reference.wav",
     language="en"
 )
-```
-
-#### CLI Usage
-```bash
-tts --text "Hello" --speaker_wav ref.wav --language en --output_file output.wav
 ```
 
 ---
@@ -253,11 +250,8 @@ tts --text "Hello" --speaker_wav ref.wav --language en --output_file output.wav
 git clone https://github.com/myshell-ai/OpenVoice.git
 cd OpenVoice
 
-# Create environment
 conda create -n openvoice python=3.10
 conda activate openvoice
-
-# Install
 pip install -r requirements.txt
 ```
 
@@ -266,14 +260,11 @@ pip install -r requirements.txt
 from openvoice import se_extractor
 from openvoice.api import ToneColorConverter
 
-# Initialize
 converter = ToneColorConverter('checkpoints/converter.yaml')
 converter.load_ckpt('checkpoints/converter.pth')
 
-# Extract speaker embedding
 se = se_extractor.get_se('reference.wav', converter)
 
-# Generate
 output = converter.convert(
     audio_prompt='path/to/audio_prompt.wav',
     text='Hello world',
@@ -281,14 +272,7 @@ output = converter.convert(
     se=se
 )
 
-# Save
 output['audio'].save('output.wav')
-```
-
-#### Quick Start
-```bash
-# Using the demo script
-python openvoice_app.py --text "Hello" --ref_audio ref.wav
 ```
 
 ---
@@ -300,31 +284,23 @@ python openvoice_app.py --text "Hello" --ref_audio ref.wav
 git clone https://github.com/facebookresearch/maskgct.git
 cd maskgct
 
-# Create environment
 conda create -n maskgct python=3.10
 conda activate maskgct
-
-# Install dependencies
 pip install -r requirements.txt
-
-# Download models (see README)
 ```
 
 #### Generate First Audio
 ```python
 import maskgct
 
-# Initialize
 model = maskgct.Model.from_pretrained('maskgct-xl')
 
-# Generate
 output = model.generate(
     text='Hello world',
     ref_audio='reference.wav',
     language='en'
 )
 
-# Save
 output.save('output.wav')
 ```
 
@@ -334,91 +310,199 @@ output.save('output.wav')
 
 #### Environment Setup
 ```bash
-# Install Kokoro
 pip install kokoro-onnx
 
-# Download model files
-# See: https://github.com/reechoai/kokoro#models
+# Download model files from GitHub releases
 ```
 
 #### Generate First Audio
 ```python
 from kokoro_onnx import Kokoro
 
-# Initialize
 kokoro = Kokoro(
     model_path='kokoro-v1.0.onnx',
     voices_path='voices.json'
 )
 
-# Generate
 samples, sample_rate = kokoro.generate(
     "Hello world, this is a test.",
     voice='af_sarah'
 )
 
-# Save
 kokoro.save_wav(samples, 'output.wav')
-```
-
-#### Available Voices
-```python
-# List available voices
-voices = kokoro.list_voices()
-print(voices)
-# ['af_sarah', 'af_jenny', 'am_michael', ...]
 ```
 
 ---
 
-### Fish-TTS
+### Fish-TTS / Fish Audio S2
 
 #### Environment Setup
 ```bash
-git clone https://github.com/fish-audio/fish-tts.git
-cd fish-tts
+git clone https://github.com/fishaudio/fish-speech.git
+cd fish-speech
 
 # Create environment
-conda create -n fishtts python=3.10
-conda activate fishtts
+conda create -n fish-speech python=3.10
+conda activate fish-speech
 
-# Install
+# Install using uv (recommended)
+pip install -U uv
+uv sync --all-extras
+
+# Or pip
 pip install -r requirements.txt
+```
+
+#### Download Models
+```bash
+# Using huggingface-cli
+hf download fishaudio/s2-pro --local-dir=checkpoints
+
+# Or modelscope
+modelscope download --model fishaudio/s2-pro --local_dir checkpoints
 ```
 
 #### Generate First Audio
 ```python
-from fish_tts import FishTTS
+from fish_audio import FishAudio
 
-# Initialize
-tts = FishTTS('fish-model')
+# Initialize S2-Pro model
+model = FishAudio("s2-pro")
 
-# Generate
-audio = tts.tts(
-    text='Hello world',
-    ref_audio='reference.wav',
-    language='en'
+# Generate with reference
+audio = model.generate(
+    text="Hello world, this is a test.",
+    reference_audio="reference.wav",  # 10+ seconds recommended
+    language="en"
 )
 
 # Save
-audio.save('output.wav')
+audio.save("output.wav")
 ```
 
-#### CLI Usage
+#### With Emotion Control
+```python
+# Using natural language tags for emotion
+audio = model.generate(
+    text="Hello! [laugh] This is amazing! [whispers] Can't believe it.",
+    reference_audio="reference.wav",
+    language="en"
+)
+```
+
+---
+
+### IndexTTS
+
+#### Environment Setup
 ```bash
-fish-tts --text "Hello" --ref ref.wav --output output.wav
+git clone https://github.com/index-tts/index-tts.git
+cd index-tts
+
+# Install uv (required)
+pip install -U uv
+
+# Install dependencies
+uv sync --all-extras
+
+# Download models
+hf download IndexTeam/IndexTTS-2 --local-dir=checkpoints
+# Or in China
+modelscope download --model IndexTeam/IndexTTS-2 --local_dir checkpoints
+```
+
+#### Generate First Audio
+```python
+from index_tts import IndexTTS
+
+# Initialize
+tts = IndexTTS("checkpoints")
+
+# Generate
+audio = tts.tts(
+    text="Hello world, this is a test.",
+    ref_audio="reference.wav",
+    language="en"
+)
+
+# Save
+audio.save("output.wav")
+```
+
+#### With Emotion Control
+```python
+# Separate timbre and emotion prompts
+audio = tts.tts(
+    text="Hello world",
+    ref_audio="speaker.wav",      # timbre reference
+    style_audio="happy.wav",      # emotion reference
+    language="en"
+)
+```
+
+#### Duration Control (IndexTTS 2.0)
+```python
+# Precise duration control mode
+audio = tts.tts(
+    text="Hello world",
+    ref_audio="reference.wav",
+    duration=5.0,  # exact seconds
+    language="en"
+)
+```
+
+---
+
+### GPT-SoVITS
+
+#### Environment Setup
+```bash
+git clone https://github.com/RVC-Boss/GPT-SoVITS.git
+cd GPT-SoVITS
+
+# Windows: download pre-packaged version
+# Or install via script
+conda create -n GPTSoVits python=3.10
+conda activate GPTSoVits
+
+# Windows
+pwsh -F install.ps1 --Device CU126 --Source HF
+
+# Linux
+bash install.sh --device CU126 --source HF
+```
+
+#### Quick Start (WebUI)
+```bash
+# Launch WebUI
+python webui.py --listen 0.0.0.0 --port 7860
+```
+
+#### Zero-shot Inference
+```python
+# 5-second audio for zero-shot
+# Requires training for better quality (1-10 min data)
+```
+
+#### Fine-tuning (Few-shot)
+```bash
+# Prepare 1-10 minute audio
+# Use WebUI for training
+# Supports cross-lingual inference
 ```
 
 ---
 
 ## Related Links
 
-| Model | GitHub |
-|-------|--------|
-| CosyVoice | https://github.com/FunAudioLLM/CosyVoice |
-| VALL-E | https://github.com/microsoft/valle |
-| Coqui TTS | https://github.com/coqui-ai/TTS |
-| OpenVoice | https://github.com/myshell-ai/OpenVoice |
-| MaskGCT | https://github.com/facebookresearch/maskgct |
-| Kokoro | https://github.com/reechoai/kokoro |
-| Fish-TTS | https://github.com/fish-audio/fish-tts |
+| Model | GitHub | HuggingFace |
+|-------|--------|-------------|
+| CosyVoice | https://github.com/FunAudioLLM/CosyVoice | https://huggingface.co/fun-audio/CosyVoice-300M |
+| VALL-E | https://github.com/microsoft/valle | https://huggingface.co/microsoft/valle-base |
+| Coqui TTS | https://github.com/coqui-ai/TTS | https://huggingface.co/coqui |
+| OpenVoice | https://github.com/myshell-ai/OpenVoice | - |
+| MaskGCT | https://github.com/facebookresearch/maskgct | - |
+| Kokoro | https://github.com/reechoai/kokoro | - |
+| Fish Audio S2 | https://github.com/fishaudio/fish-speech | https://huggingface.co/fishaudio/s2-pro |
+| IndexTTS | https://github.com/index-tts/index-tts | https://huggingface.co/IndexTeam/IndexTTS-2 |
+| GPT-SoVITS | https://github.com/RVC-Boss/GPT-SoVITS | https://huggingface.co/lj1995/GPT-SoVITS |
